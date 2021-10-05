@@ -5,14 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-/**
- * @Description Nacos 启动类
- *
- * @return
- * @Author Ada
- * @Date 23:24 2021/9/26
- **/
-@SpringBootApplication(scanBasePackages = "com.ada.nacos")
+@SpringBootApplication(scanBasePackages = "com.alibaba.nacos")
 @ServletComponentScan
 @EnableScheduling
 public class NacosApplication {
