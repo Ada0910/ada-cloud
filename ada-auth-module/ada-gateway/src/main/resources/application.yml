@@ -1,0 +1,23 @@
+server:
+  port: 9999 # 端口号
+spring:
+  application:
+    name: ada-gateway # 应用名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  #nacos的地址
+    gateway:
+      discovery:
+        locator:
+          enabled: false  #开启表示根据微服务名称映射，就是微服务名称拼接到url中可以直接访问，但是不推荐这么使用 容易暴露微服务
+      enabled: true  #默认开启网关true，关闭网关false
+      routes:  # 配置路由路径
+        - id: ada-auth  #路由ID
+          uri: lb://ada-auth  #匹配后路由地址
+          predicates:
+            - Path: /ada-auth/** #断言，匹配/ada-auth/ 前缀的路径
+          filters:
+            - StripPrefix=1  #对指定数量的路径前缀进行去除的过滤器
+
+
