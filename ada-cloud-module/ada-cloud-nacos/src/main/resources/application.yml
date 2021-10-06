@@ -50,4 +50,4 @@ nacos:
   security:
     ignore:
       urls: /,/error,/**/*.css,/**/*.js,/**/*.html,/**/*.map,/**/*.svg,/**/*.png,/**/*.ico,/console-ui/public/**,/v1/auth/**,/v1/console/health/**,/actuator/**,/v1/console/server/**
-  standalone: true
+  standalone: true # 是否是单机运行
