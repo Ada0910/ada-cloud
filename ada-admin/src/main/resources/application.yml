@@ -2,6 +2,6 @@ server:
   port: 9401 # 端口号
 spring:
   application:
-    name: ada-auth # 应用名称
+    name: ada-admin # 应用名称
 
 

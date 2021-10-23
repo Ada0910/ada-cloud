@@ -20,8 +20,14 @@
 
 	<!--模块引用-->
 	<modules>
+		<!--基础模块-->
 		<module>ada-base</module>
+		<!--微服务模块-->
 		<module>ada-cloud-module</module>
+		<!--认证模块-->
+		<module>ada-auth-module</module>
+		<!--用户模块-->
+		<module>ada-admin</module>
 	</modules>
 
 </project>

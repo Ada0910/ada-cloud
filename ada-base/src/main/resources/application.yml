@@ -1,0 +1,7 @@
+server:
+  port: 9001 # 端口号
+spring:
+  application:
+    name: ada-base # 应用名称
+
+
