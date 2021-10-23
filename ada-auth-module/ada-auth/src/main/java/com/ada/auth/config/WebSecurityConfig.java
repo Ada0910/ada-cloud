@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
-	 * 自定义鉴权规则
+	 * 自定义鉴权规则(配置拦截规则)
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

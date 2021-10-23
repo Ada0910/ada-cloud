@@ -16,6 +16,11 @@
 	</properties>
 
 	<dependencies>
+		<!--<dependency>-->
+		<!--<groupId>com.ada</groupId>-->
+		<!--<artifactId>ada-base</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+	<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -41,6 +46,17 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 			<version>2.1.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
 		</dependency>
 
 	</dependencies>
