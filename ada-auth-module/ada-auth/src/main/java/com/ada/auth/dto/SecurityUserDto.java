@@ -42,10 +42,6 @@ public class SecurityUserDto  implements UserDetails {
 	 */
 	private Collection<SimpleGrantedAuthority> authorities;
 
-	public SecurityUserDto() {
-
-	}
-
 	public SecurityUserDto(UserDto userDto) {
 		this.setId(userDto.getId());
 		this.setUsername(userDto.getUsername());
