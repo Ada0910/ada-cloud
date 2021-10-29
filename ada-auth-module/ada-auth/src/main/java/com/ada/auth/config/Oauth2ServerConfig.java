@@ -1,8 +1,11 @@
 package com.ada.auth.config;
 
+import com.ada.auth.component.JwtTokenEnhancer;
 import com.ada.auth.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -13,7 +16,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
+import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +42,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 	private final PasswordEncoder passwordEncoder;
 	private final UserServiceImpl userService;
 	private final AuthenticationManager authenticationManager;
+	private final JwtTokenEnhancer jwtTokenEnhancer;
 
 
 	@Override
@@ -72,8 +78,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		List<TokenEnhancer> delegates = new ArrayList<>();
-		//TODO 将类型添加到delegates列表中
-
+		delegates.add(jwtTokenEnhancer);
+		delegates.add(accessTokenConverter());
 
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
 		//配置JWT的内容增强器
@@ -81,10 +87,17 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 		endpoints.authenticationManager(authenticationManager).userDetailsService(userService).accessTokenConverter(accessTokenConverter()).tokenEnhancer(enhancerChain);
 	}
 
-	/**
-	 *
-	 */
-	private JwtAccessTokenConverter accessTokenConverter() {
-		return null;
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+		jwtAccessTokenConverter.setKeyPair(keyPair());
+		return jwtAccessTokenConverter;
+	}
+
+	@Bean
+	public KeyPair keyPair() {
+		//从classpath下的证书中获取秘钥对
+		KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
+		return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
 	}
 }
